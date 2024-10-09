@@ -4,7 +4,9 @@ querySelector() é uma função para selecionar um ÚNICO elemento na página (D
 
 querySelectorAll() é uma função para selecionar VÁRIOS elementos na página (DOM).
 
-Nos dois casos, a seleção é feita usando seletores comuns ao que fazemos no CSS. */
+Nos dois casos, a seleção é feita usando seletores comuns ao que fazemos no CSS.
+
+*/
 
 /* Exemplos */
 const titulo = document.querySelector("h1");
@@ -37,11 +39,57 @@ for( const link of links ){
 
 /* Manipulando Eventos */
 const ex1 = document.querySelector("#exemplo01");
-const msg = document.querySelector("#mensagem");
 
-ex1.addEventListener("clink", function(){
+/* Poderíamos também usar a função getElementById em vez do querySelector. A diferença é que ela só funciona para seleção através do ID. Obs: ao usá-la NÃO COLOQUE #. */
+//const msg = document.getElementById("mensagem");
+
+const msg = document.querySelector("#mensagem");
+const pagina = document.querySelector("body");
+
+
+/* Função Ouvinte de Evento (Event Listener)
+aplicado ao elemento ALVO do evento desejado ("click") e uma função para executar as ações a partir do evento. Obs.: esta função é considerada do tipo "anônima" e é conhecida como "callback". */
+ex1.addEventListener("click", function(){
+    /* Acessamos o parágrafo vazio e colocamos
+    um conteúdo dentro dele */
     msg.innerHTML = "Te amo Sunoo 💋!";
+
+    /* Modificar a página alterando a fonte (CSS via JS) */
+    pagina.style.fontFamily = "Verdana";
 });
+
+/* OUvinte de evento para voltar ao normal (sem texto no parágrafo e com fonte padrão na página). O evento ocorrerá ao clicar DUAS VEZES no parágrafo da mensagem. */
+msg.addEventListener("dblclick", function(){
+    msg.innerHTML = ""; // removendo o conteúdo do parágrafo
+    pagina.style.fontFamily = "initial"; // voltando pra fonte
+})
+
+
+/* Exemplo 02: modo noturno */
+const botaoAtivar = document.querySelector("#ativar");
+botaoAtivar.addEventListener("click", function(){
+    /* Usamos o toggle do classList para alternar a aplicação/remoção da classe "noturno".
+    Na prática, vira um liga/desliga. */
+    pagina.classList.toggle("noturno");
+
+    if (pagina.classList.contains("noturno")){
+        botaoAtivar.textContent = "Desativar";
+    }
+    else {
+        botaoAtivar.textContent = "Ativar";
+    }
+})
+
+/* Sobre o duplo e o triplo sinal de igual */
+let a = "10"; // texto
+let b = 10; // número
+let resultado = a == b; // true
+// let resultado = a === b; false
+console.log(resultado);
+
+// == comapara VALORES
+// === compara VALORES E TIPO DE DADO
+
 
 
 
